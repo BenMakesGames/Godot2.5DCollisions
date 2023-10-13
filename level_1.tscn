@@ -138,8 +138,8 @@ texture = ExtResource("3_3j8eq")
 z_index = 2
 position = Vector2(-41, 7.00001)
 scale = Vector2(1, 0.199995)
-collision_layer = 3
-collision_mask = 3
+collision_layer = 0
+collision_mask = 0
 LowerZ = 1
 UpperZ = 2
 

@@ -16,29 +16,21 @@ public sealed partial class ZSwitcher : Area2D
 
 	public override void _EnterTree()
 	{
-		GD.Print("ZSwitcher._EnterTree");
+		CollisionLayer = (uint)(1 << (LowerZ - 1)) + (uint)(1 << (UpperZ - 1));
+		CollisionMask = (uint)(1 << (LowerZ - 1)) + (uint)(1 << (UpperZ - 1));
+
 		BodyExited += OnBodyExited;
 	}
 
 	public override void _ExitTree()
 	{
-		GD.Print("ZSwitcher._ExitTree");
 		BodyExited -= OnBodyExited;
 	}
 
 	public void OnBodyExited(Node2D body)
 	{
-		GD.Print($"ZSwitcher.OnBodyExited(#{body.GetInstanceId()})");
-
-		if (body is not ISwitchesZ switches)
+		if (body is not IZTraveller switches)
 			return;
-
-		GD.Print($"  old body Z: {switches.Z}");
-		GD.Print($"  velocity: ({switches.Velocity.X}, {switches.Velocity.Y})");
-
-		GD.Print($"  LowerZ: {LowerZ}");
-		GD.Print($"  UpperZ: {LowerZ}");
-		GD.Print($"  UpDirection: {UpDirection}");
 
 		if (switches.Z == LowerZ)
 		{
@@ -68,8 +60,6 @@ public sealed partial class ZSwitcher : Area2D
 			if (UpDirection == Direction.West && switches.Velocity.X > 0)
 				switches.Z = LowerZ;
 		}
-
-		GD.Print($"  new body Z: {switches.Z}");
 	}
 }
 

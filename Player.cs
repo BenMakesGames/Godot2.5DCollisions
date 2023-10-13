@@ -2,7 +2,7 @@ using Godot;
 
 namespace TwoPointFiveDee;
 
-public sealed partial class Player : CharacterBody2D, ISwitchesZ
+public sealed partial class Player : CharacterBody2D, IZTraveller
 {
 	[Export]
 	public int Speed { get; set; } = 200;
